@@ -1,0 +1,93 @@
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+
+/// One catalog for activation, tooltips and the keyboard reference.
+class EditorKeyboard {
+  static const tools = <String, (LogicalKeyboardKey, String, bool)>{
+    'cloud': (LogicalKeyboardKey.digit1, 'Shift+1', true),
+    'balloon': (LogicalKeyboardKey.digit2, 'Shift+2', true),
+    'rounded rectangle': (LogicalKeyboardKey.digit3, 'Shift+3', true),
+    'capsule': (LogicalKeyboardKey.digit4, 'Shift+4', true),
+    'hexagon': (LogicalKeyboardKey.digit5, 'Shift+5', true),
+    'dashed line': (LogicalKeyboardKey.digit6, 'Shift+6', true),
+    'vector curve': (LogicalKeyboardKey.digit7, 'Shift+7', true),
+    'connector': (LogicalKeyboardKey.digit8, 'Shift+8', true),
+    'elbow connector': (LogicalKeyboardKey.digit9, 'Shift+9', true),
+    'straight connector': (LogicalKeyboardKey.digit0, 'Shift+0', true),
+    'pen': (LogicalKeyboardKey.keyB, 'B', false),
+    'fountain': (LogicalKeyboardKey.keyB, 'Shift+B', true),
+    'dynamic': (LogicalKeyboardKey.keyD, 'Shift+D', true),
+    'fixed': (LogicalKeyboardKey.keyF, 'Shift+F', true),
+    'wire': (LogicalKeyboardKey.keyW, 'Shift+W', true),
+    'soft pencil': (LogicalKeyboardKey.keyP, 'P', false),
+    'hard pencil': (LogicalKeyboardKey.keyP, 'Shift+P', true),
+    'marker': (LogicalKeyboardKey.keyM, 'M', false),
+    'airbrush': (LogicalKeyboardKey.keyX, 'X', false),
+    'watercolor': (LogicalKeyboardKey.keyW, 'W', false),
+    'fill': (LogicalKeyboardKey.keyF, 'F', false),
+    'dotted': (LogicalKeyboardKey.keyZ, 'Z', false),
+    'line': (LogicalKeyboardKey.keyL, 'L', false),
+    'arrow': (LogicalKeyboardKey.keyA, 'A', false),
+    'rectangle': (LogicalKeyboardKey.keyR, 'R', false),
+    'ellipse': (LogicalKeyboardKey.keyO, 'O', false),
+    'triangle': (LogicalKeyboardKey.keyJ, 'J', false),
+    'compass': (LogicalKeyboardKey.keyC, 'C', false),
+    'bezier': (LogicalKeyboardKey.keyS, 'S', false),
+    'area': (LogicalKeyboardKey.keyG, 'Shift+G', true),
+    'angle': (LogicalKeyboardKey.keyA, 'Shift+A', true),
+    'text': (LogicalKeyboardKey.keyT, 'T', false),
+    'image': (LogicalKeyboardKey.keyI, 'Shift+I', true),
+    'eyedropper': (LogicalKeyboardKey.keyI, 'I', false),
+    'diamond': (LogicalKeyboardKey.keyD, 'D', false),
+    'measure': (LogicalKeyboardKey.keyG, 'G', false),
+    'select': (LogicalKeyboardKey.keyV, 'V', false),
+    'lasso': (LogicalKeyboardKey.keyQ, 'Q', false),
+    'pan': (LogicalKeyboardKey.keyH, 'H', false),
+    'eraser': (LogicalKeyboardKey.keyE, 'E', false),
+    'slice': (LogicalKeyboardKey.keyK, 'K', false),
+    'nudge': (LogicalKeyboardKey.keyN, 'N', false),
+    'mask': (LogicalKeyboardKey.keyM, 'Shift+M', true),
+    'soft mask': (LogicalKeyboardKey.keyE, 'Shift+E', true),
+  };
+
+  static String? label(String tool) => tools[tool]?.$2;
+  static SingleActivator activator(String tool) {
+    final entry=tools[tool]!;
+    return SingleActivator(entry.$1,shift:entry.$3,includeRepeats:false);
+  }
+
+  static const actions = <String, (SingleActivator, String, String)>{
+    'undo': (SingleActivator(LogicalKeyboardKey.keyZ,control:true,includeRepeats:false),'Ctrl+Z','Desfazer'),
+    'redo': (SingleActivator(LogicalKeyboardKey.keyZ,control:true,shift:true,includeRepeats:false),'Ctrl+Shift+Z','Refazer'),
+    'redo2': (SingleActivator(LogicalKeyboardKey.keyY,control:true,includeRepeats:false),'Ctrl+Y','Refazer (alternativo)'),
+    'save': (SingleActivator(LogicalKeyboardKey.keyS,control:true,includeRepeats:false),'Ctrl+S','Salvar'),
+    'search': (SingleActivator(LogicalKeyboardKey.keyF,control:true,includeRepeats:false),'Ctrl+F','Buscar textos'),
+    'picker': (SingleActivator(LogicalKeyboardKey.keyK,control:true,includeRepeats:false),'Ctrl+K','Escolher ferramenta'),
+    'copy': (SingleActivator(LogicalKeyboardKey.keyC,control:true,includeRepeats:false),'Ctrl+C','Copiar seleção'),
+    'paste': (SingleActivator(LogicalKeyboardKey.keyV,control:true,includeRepeats:false),'Ctrl+V','Colar objetos ou imagem'),
+    'cut': (SingleActivator(LogicalKeyboardKey.keyX,control:true,includeRepeats:false),'Ctrl+X','Recortar seleção'),
+    'duplicate': (SingleActivator(LogicalKeyboardKey.keyD,control:true,includeRepeats:false),'Ctrl+D','Duplicar seleção'),
+    'all': (SingleActivator(LogicalKeyboardKey.keyA,control:true,includeRepeats:false),'Ctrl+A','Selecionar todos os objetos editáveis'),
+    'delete': (SingleActivator(LogicalKeyboardKey.delete,includeRepeats:false),'Delete','Excluir seleção (Desfazer disponível)'),
+    'group': (SingleActivator(LogicalKeyboardKey.keyG,control:true,includeRepeats:false),'Ctrl+G','Agrupar seleção'),
+    'ungroup': (SingleActivator(LogicalKeyboardKey.keyG,control:true,shift:true,includeRepeats:false),'Ctrl+Shift+G','Desagrupar seleção'),
+    'escape': (SingleActivator(LogicalKeyboardKey.escape,includeRepeats:false),'Esc','Cancelar menu radial / limpar seleção'),
+    'fit': (SingleActivator(LogicalKeyboardKey.digit0,control:true,includeRepeats:false),'Ctrl+0','Enquadrar desenhos'),
+    'reset': (SingleActivator(LogicalKeyboardKey.digit1,control:true,includeRepeats:false),'Ctrl+1','Centralizar e zerar rotação'),
+    'zoomIn': (SingleActivator(LogicalKeyboardKey.equal),'=','Aumentar zoom'),
+    'zoomInPlus': (SingleActivator(LogicalKeyboardKey.equal,shift:true),'Shift+=','Aumentar zoom (+)'),
+    'zoomInPad': (SingleActivator(LogicalKeyboardKey.numpadAdd),'Num +','Aumentar zoom (teclado numérico)'),
+    'zoomOutPad': (SingleActivator(LogicalKeyboardKey.numpadSubtract),'Num -','Diminuir zoom (teclado numérico)'),
+    'zoomOut': (SingleActivator(LogicalKeyboardKey.minus),'-','Diminuir zoom'),
+    'brushUp': (SingleActivator(LogicalKeyboardKey.bracketRight),']','Aumentar espessura da caneta'),
+    'brushDown': (SingleActivator(LogicalKeyboardKey.bracketLeft),'[','Diminuir espessura da caneta'),
+    'rotate': (SingleActivator(LogicalKeyboardKey.keyR,alt:true,includeRepeats:false),'Alt+R','Girar quadro 15°'),
+    'layers': (SingleActivator(LogicalKeyboardKey.keyL,alt:true,includeRepeats:false),'Alt+L','Camadas'),
+    'fullscreen': (SingleActivator(LogicalKeyboardKey.f11,includeRepeats:false),'F11','Alternar tela cheia do editor'),
+    'center': (SingleActivator(LogicalKeyboardKey.f1,includeRepeats:false),'F1','Central de ações'),
+    'help': (SingleActivator(LogicalKeyboardKey.f2,includeRepeats:false),'F2','Consultar atalhos'),
+    'lastInk': (SingleActivator(LogicalKeyboardKey.keyB,alt:true,includeRepeats:false),'Alt+B','Última ferramenta de escrita'),
+    'eraser': (SingleActivator(LogicalKeyboardKey.keyE,alt:true,includeRepeats:false),'Alt+E','Borracha'),
+    'select': (SingleActivator(LogicalKeyboardKey.keyV,alt:true,includeRepeats:false),'Alt+V','Selecionar'),
+  };
+}
