@@ -1,0 +1,7 @@
+CADERNO INFINITO v1.0.6 — PROJETO-FONTE COMPLETO
+
+1. Execute 04_VERIFICAR_NO_C.cmd.
+2. Se passar, execute 01_COMPILAR_TUDO_NO_C.cmd.
+Pasta de compilacao: %USERPROFILE%\ci107_full
+Resultados: %USERPROFILE%\ci107_full\dist
+Google Drive: requer credenciais OAuth configuradas separadamente.

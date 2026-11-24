@@ -1,0 +1,14 @@
+CADERNO INFINITO 1.0.2 — CHECKLIST DE COMPILAÇÃO
+
+1) Faça backup dos seus cadernos importantes antes de atualizar.
+2) Extraia o ZIP integralmente em uma pasta qualquer.
+3) Execute 04_VERIFICAR_NO_C.cmd (flutter analyze + flutter test).
+4) Se não houver erros, execute 01_COMPILAR_TUDO_NO_C.cmd.
+5) Os resultados ficarão em %USERPROFILE%\ci107_full\dist\.
+6) Windows: distribua toda a pasta CadernoInfinito_Windows.
+7) Android: arquivo CadernoInfinito_Android.apk.
+
+NOVIDADE: colar imagens do Windows com Ctrl+V, sem abrir o gerenciador de arquivos.
+
+O Flutter não foi executado neste ambiente de preparação. Se houver erro,
+envie os resultados de flutter analyze e flutter test para diagnóstico.

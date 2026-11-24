@@ -1,0 +1,21 @@
+.dart_tool/
+.flutter-plugins*
+.packages
+build/
+android/.gradle/
+android/local.properties
+windows/flutter/ephemeral/
+config.local.json
+*.jks
+*.keystore
+.idea/
+.vscode/
+
+# Identificadores OAuth do projeto e downloads particulares do Google Cloud
+oauth_*.json
+web_oauth.json
+desktop_oauth.json
+google-services.json
+**/google-services.json
+# Executaveis e APKs gerados localmente
+dist/

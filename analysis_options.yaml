@@ -1,0 +1,9 @@
+analyzer:
+  errors:
+    # Flutter 3.50.1 marca material.dart como legado, mas material_ui não
+    # integra as dependências deste projeto; manter a importação funcional.
+    deprecated_member_use: ignore
+    invalid_annotation_target: ignore
+linter:
+  rules:
+    prefer_const_constructors: false
